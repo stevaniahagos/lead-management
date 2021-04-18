@@ -1,0 +1,60 @@
+<div class='card'>
+
+  <div class='card-header'>
+    {{ pageTitle }}
+  </div>
+
+  <div class='card-body'>
+
+    <div class='row'>
+      <div class='col-md-2'>Filter by: </div>
+      <div class='col-md-4'>
+        <input type='text'
+          [(ngModel)]='listFilter'/>
+      </div>
+      <div class='col-md-3'>
+        <h5>Filtered by: {{listFilter}}</h5>
+      </div>
+    </div>
+
+    <div class='table-responsive'>
+      <table class='table' *ngIf="products.length">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{product.productName}}</td>
+            <td><button class="btn btn-dark" (click)="toggleLeads(product.productCode)">Show Leads</button></td>
+            <table class='table' *ngIf="product.showLeads">
+              <tr>
+                <th>Lead Name</th>
+                <th>Manager Name</th>
+              </tr>
+              <tr *ngFor="let lead of product.leads">
+                <td>{{lead.leadName}}</td>
+                <td>{{lead.managerName}}</td>
+              </tr>
+            </table>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class='card-body'>
+    Lead Name: <input value="lead" [value]="nameOfLead" type="text" [(ngModel)]="nameOfLead"><br/>
+    Manager Name: <select>
+      <option *ngFor="let mName of managers" [(ngModel)]="nameOfManager">{{mName}}</option>
+    </select><br/>
+    Product: <select>
+      <option *ngFor="let product of products" [(ngModel)]="code")]>{{product.productName}}</option>
+    </select><br/>
+    <button class="btn btn-dark" (click)="updateLeads(code, nameOfLead, nameOfManager)">Add Lead</button>
+  </div>
+
+</div>
